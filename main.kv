@@ -1,0 +1,97 @@
+MDBoxLayout:
+    orientation: 'vertical'
+
+    MDToolbar:
+        title: 'Products Registration'
+        right_action_items: [["file-pdf-box-outline", lambda x:app.open_settings_screen()]]
+
+
+    MDFloatLayout:
+        id: mainfloat
+        size_hint: 1, .9
+
+        MDTextField:
+            hint_text: 'Description'
+            mode: 'rectangle'
+            size_hint: .9, .085
+            pos_hint: {'center_x':.5 , 'y':.92 }
+
+        MDTextField:
+            hint_text: 'Price'
+            mode: 'rectangle'
+            size_hint: .9, .085
+            pos_hint: {'center_x':.5 , 'y':.835 }
+        
+        MDTextField:
+            hint_text: 'Date'
+            mode: 'rectangle'
+            size_hint: .9, .085
+            pos_hint: {'center_x':.5 , 'y':.75 }
+
+        MDBoxLayout:
+            spacing: '5dp'
+            size_hint: .95, None
+            pos_hint: {'center_x': .5, 'y': .67}
+
+            MDRaisedButton:
+                text: 'Insert'
+                size_hint: .25, None
+
+            MDRaisedButton:
+                text: 'Update'
+                # md_bg_color: 0, 1, 0, 1
+                size_hint: .25, None
+            
+            MDRaisedButton:
+                text: 'Delete'
+                # md_bg_color: 1, 0, 0, 1
+                size_hint: .25, None
+                theme_text_color: "Custom"
+                text_color: 1, 1, 0, 1
+
+            MDRaisedButton:
+                text: 'Cancel'
+                size_hint: .25, None
+            
+        MDBoxLayout:
+            id: datatable
+            pos_hint: {'center_x': .5, 'y':.13}
+            size_hint_x: .95
+
+
+        MDBoxLayout:
+            pos_hint: {'center_x': .5, 'y': .005}
+            size_hint: .9, .8
+
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint: .2, .15
+                MDBoxLayout:
+                    Check:
+                        size_hint: None, None
+                        size: "38dp", "38dp"
+
+                    MDLabel:
+                        text: 'id'
+                MDBoxLayout:
+                    Check:
+                        size_hint: None, None
+                        size: "38dp", "38dp"
+                    MDLabel:
+                        text: 'Description'
+
+
+            MDTextField:
+                hint_text: 'Search'
+                mode: 'rectangle'
+                size_hint_x: .7
+                pos_hint: {'center_x':.5, 'y': .02}
+                
+        
+            # MDIconButton:
+            #     pos_hint: {'center_x':.5}
+            #     icon: 'file-pdf-box-outline'
+            #     user_font_size: "50sp"
+
+<Check@MDCheckbox>:
+    group: 'group'
