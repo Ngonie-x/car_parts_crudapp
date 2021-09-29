@@ -1,6 +1,7 @@
 from kivymd.app import MDApp
 from kivymd.uix.datatables import MDDataTable
 from kivy.metrics import dp
+from kivymd.uix.picker import MDDatePicker
 
 
 class MainApp(MDApp):
@@ -22,7 +23,23 @@ class MainApp(MDApp):
         )
 
         self.root.ids['datatable'].add_widget(self.data_table)
-    
+
+    def on_save(self, instance, value, date_range):
+        '''Called when we select a date from the datetime picker'''
+        self.root.ids['date_field'].text = str(value)
+        print(value)
+
+
+    def show_date_picker(self):
+        self.root.ids['date_field'].focus = False
+        date_dialog = MDDatePicker()
+        date_dialog.bind(on_save=self.on_save)
+        date_dialog.open()
+
+    def search(self):
+        '''Search values in the database'''
+        print(self.root.ids['search'].text)
+
 
 if __name__ == '__main__':
     app = MainApp()

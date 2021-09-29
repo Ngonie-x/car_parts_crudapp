@@ -11,22 +11,26 @@ MDBoxLayout:
         size_hint: 1, .9
 
         MDTextField:
+            id: description_field
             hint_text: 'Description'
             mode: 'rectangle'
             size_hint: .9, .085
             pos_hint: {'center_x':.5 , 'y':.92 }
 
         MDTextField:
+            id: price_field
             hint_text: 'Price'
             mode: 'rectangle'
             size_hint: .9, .085
             pos_hint: {'center_x':.5 , 'y':.835 }
         
         MDTextField:
+            id: date_field
             hint_text: 'Date'
             mode: 'rectangle'
             size_hint: .9, .085
             pos_hint: {'center_x':.5 , 'y':.75 }
+            on_focus: app.show_date_picker()
 
         MDBoxLayout:
             spacing: '5dp'
@@ -82,16 +86,13 @@ MDBoxLayout:
 
 
             MDTextField:
+                id: search
                 hint_text: 'Search'
                 mode: 'rectangle'
                 size_hint_x: .7
                 pos_hint: {'center_x':.5, 'y': .02}
+                on_text: app.search()
                 
-        
-            # MDIconButton:
-            #     pos_hint: {'center_x':.5}
-            #     icon: 'file-pdf-box-outline'
-            #     user_font_size: "50sp"
 
 <Check@MDCheckbox>:
     group: 'group'
