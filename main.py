@@ -2,10 +2,15 @@ from kivymd.app import MDApp
 from kivymd.uix.datatables import MDDataTable
 from kivy.metrics import dp
 from kivymd.uix.picker import MDDatePicker
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.button import MDFlatButton
 from db import Database
 
 
+
 class MainApp(MDApp):
+    dialog = None
+
     def build(self):
         # set the theme color
         self.theme_cls.primary_palette = "DeepPurple"
@@ -21,7 +26,6 @@ class MainApp(MDApp):
             size_hint=(1, 0.53),
             use_pagination= True,
             check=True,
-            # pos_hint={'center_x': .5, 'y':.05},
             column_data=[
                 ("Id", dp(30)),
                 ("Description", dp(60)),
@@ -125,9 +129,18 @@ class MainApp(MDApp):
 
     def export_to_pdf(self):
         '''Export data to pdf'''
-        self.database.export_data_to_pdf()
+        try:
+            self.database.export_data_to_pdf()
+        except PermissionError:
+            self.show_alert_dialog()
 
-
+    def show_alert_dialog(self):
+        if not self.dialog:
+            self.dialog = MDDialog(
+                text="An application is using products.pdf. Please close it to proceed.",
+                radius=[20, 7, 20, 7],
+            )
+        self.dialog.open()
 
 if __name__ == '__main__':
     app = MainApp()
