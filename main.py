@@ -123,6 +123,10 @@ class MainApp(MDApp):
         self.root.ids['price_field'].text = ''
         self.root.ids['date_field'].text = ''
 
+    def export_to_pdf(self):
+        '''Export data to pdf'''
+        self.database.export_data_to_pdf()
+
 
 
 if __name__ == '__main__':

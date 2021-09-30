@@ -1,5 +1,6 @@
 import sqlite3
 import datetime
+from pdf import ExtractToPdf
 
 
 class Database:
@@ -44,6 +45,10 @@ class Database:
         '''Delete the product'''
         self.cursor.execute("DELETE FROM products WHERE id=?", (id))
         self.con.commit()
+
+    def export_data_to_pdf(self):
+        all_products = self.cursor.execute("SELECT * FROM products")
+        ExtractToPdf(all_products)
 
     def close_db_connection(self):
         '''Close the connection to the database'''
