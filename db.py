@@ -1,5 +1,5 @@
 import sqlite3
-from datetime import date
+import datetime
 
 
 class Database:
@@ -15,9 +15,11 @@ class Database:
         self.cursor.execute("CREATE TABLE IF NOT EXISTS products(id integer PRIMARY KEY AUTOINCREMENT, description varchar(50) NOT NULL, price FLOAT NOT NULL, date_created DATE)")
         self.con.commit()
 
-    def create_entry(self, decription, price, date_created):
+    def create_entry(self, description, price, date_created):
         '''Create a products entry'''
-        self.cursor.execute("INSERT INTO products(decription, price, date_created) VALUES (?, ?, ?)", (decription, price, date_created))
+        format_str = '%Y-%m-%d' # The format
+        date_created = datetime.datetime.strptime(str(date_created), format_str)
+        self.cursor.execute("INSERT INTO products(description, price, date_created) VALUES (?, ?, ?)", (description, float(price), date_created))
         self.con.commit()
 
     def get_products(self):

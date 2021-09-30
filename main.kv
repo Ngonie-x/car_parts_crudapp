@@ -40,11 +40,13 @@ MDBoxLayout:
             MDRaisedButton:
                 text: 'Insert'
                 size_hint: .25, None
+                on_release: app.insert_data()
 
             MDRaisedButton:
                 text: 'Update'
                 # md_bg_color: 0, 1, 0, 1
                 size_hint: .25, None
+                on_release: app.update_data()
             
             MDRaisedButton:
                 text: 'Delete'
@@ -52,6 +54,7 @@ MDBoxLayout:
                 size_hint: .25, None
                 theme_text_color: "Custom"
                 text_color: 1, 1, 0, 1
+                on_release: app.delete_data()
 
             MDRaisedButton:
                 text: 'Cancel'
