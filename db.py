@@ -17,8 +17,6 @@ class Database:
 
     def create_entry(self, description, price, date_created):
         '''Create a products entry'''
-        format_str = '%Y-%m-%d' # The format
-        date_created = datetime.datetime.strptime(str(date_created), format_str)
         self.cursor.execute("INSERT INTO products(description, price, date_created) VALUES (?, ?, ?)", (description, float(price), date_created))
         self.con.commit()
 
@@ -29,12 +27,12 @@ class Database:
 
     def get_product_by_id(self, id):
         '''Get the element with the specified id'''
-        product = self.cursor.execute("SELECT * FROM products WHERE id=?", (id))
+        product = self.cursor.execute("SELECT * FROM products WHERE id=?", (id,))
         return product
 
     def get_products_by_description(self, description):
         '''Get elements with a description similar to that given by the user'''
-        products = self.cursor.execute("SELECT * FROM products WHERE description=?", (description))
+        products = self.cursor.execute("SELECT * FROM products WHERE description LIKE ?", ('%'+description+'%',))
         return products
 
     def update_product(self, id, description, price, date_created):
@@ -44,7 +42,7 @@ class Database:
 
     def delete_product(self, id):
         '''Delete the product'''
-        self.cursor.execute("DELETE FROM tasks WHERE id=?", (id))
+        self.cursor.execute("DELETE FROM products WHERE id=?", (id))
         self.con.commit()
 
     def close_db_connection(self):
