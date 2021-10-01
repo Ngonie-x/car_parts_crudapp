@@ -43,7 +43,7 @@ class Database:
 
     def delete_product(self, id):
         '''Delete the product'''
-        self.cursor.execute("DELETE FROM products WHERE id=?", (id))
+        self.cursor.execute("DELETE FROM products WHERE id=?", (id,))
         self.con.commit()
 
     def export_data_to_pdf(self):
