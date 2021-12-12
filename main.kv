@@ -1,41 +1,153 @@
-MDBoxLayout:
-    orientation: 'vertical'
+ScreenManagement:
+    MainScreen:
+    CameraScreen:
 
-    MDToolbar:
-        title: 'Products Registration'
-        right_action_items: [["file-pdf-box-outline", lambda x:app.export_to_pdf()]]
+<MainScreen>:
+    name: 'mainscreen'
+    MDBoxLayout:
+        orientation: 'vertical'
+        spacing: 5
+
+        # Toolbar
+        MDToolbar:
+            title: 'Products Registration'
+            right_action_items: [["file-pdf-box-outline", lambda x:app.export_to_pdf()]]
+
+        # Main content area
+        MDBoxLayout:
+            orientation: 'horizontal'
+            size_hint_x: 1
+            
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint: .4, None
+                spacing: 10
+
+                # textfields start here
+                
+                MDTextField:
+                    id: description_field
+                    hint_text: 'Description'
+                    mode: 'rectangle'
+                    size_hint: .9, None
+                    pos_hint: {'center_x': .5}
 
 
-    MDFloatLayout:
-        id: mainfloat
-        size_hint: 1, .9
+                MDTextField:
+                    id: price_field
+                    hint_text: 'Price'
+                    mode: 'rectangle'
+                    size_hint: .9, None
+                    pos_hint: {'center_x': .5}
 
-        MDTextField:
-            id: description_field
-            hint_text: 'Description'
-            mode: 'rectangle'
-            size_hint: .9, .085
-            pos_hint: {'center_x':.5 , 'y':.92 }
+                
+                MDTextField:
+                    id: date_field
+                    hint_text: 'Date'
+                    mode: 'rectangle'
+                    size_hint: .9, None
+                    pos_hint: {'center_x': .5}
+                    on_focus: app.show_date_picker()
+                
+                # End text fields
 
-        MDTextField:
-            id: price_field
-            hint_text: 'Price'
-            mode: 'rectangle'
-            size_hint: .9, .085
-            pos_hint: {'center_x':.5 , 'y':.835 }
+                MDBoxLayout:
+                    size_hint: .9, None
+                    height: 40
+                    pos_hint: {'center_x': .5}
+
+                    MDLabel:
+                        id: measurement_lbl
+                        text: "No measurement selected."
+                        pos_hint: {'center_y': .5, 'center_y': .5}
+
+
+                    MDRaisedButton:
+                        id: measurement_btn
+                        text: "Select Measurement"
+                        size_hint: .7, None
+                        on_release: app.show_measurement_dialog()
+            
+
+            # photo section starts here
+            MDBoxLayout:
+                orientation: 'vertical'
+                size_hint: .4, 1
+                spacing: 10
+
+
+                MDLabel:
+                    text: "Product Photo"
+                    size_hint: .5, None
+                    height: 20
+                    pos_hint: {'center_x': .7}
+
+                FitImage:
+                    id: product_img
+                    size_hint: .5, None
+                    height: "130dp"
+                    pos_hint: {'center_x': .7}
+                    source: './images/vege.jpg'
+
+                MDLabel:
+                    id: product_label
+                    text: "1.png"
+                    size_hint: .5, None
+                    height: 20
+                    pos_hint: {'center_x': .7}
+                    
+
+                MDRaisedButton:
+                    text: "Start Photo"
+                    size_hint: .5, None
+                    pos_hint: {'center_x': .7}
+                    on_release: app.go_to_cam_screen()
+
+
+        MDBoxLayout:
+            size_hint: 1, None
+            height: 40
+            # spacing: 10
+
+            MDBoxLayout:
+                size_hint_x: .5
+                padding: 25
+                MDLabel:
+                    id: category_lbl
+                    text: "No category selected."
+                    pos_hint: {'center_y': .5}
+
+
+                MDRaisedButton:
+                    id: measurement_btn
+                    text: "Select Category"
+                    on_release: app.show_category_dialog()
+                    pos_hint: {'center_y': .5}
+                    size_hint: .7, None
+
+            
+            MDBoxLayout:
+                size_hint_x: .5
+                MDLabel:
+
+                MDCheckbox:
+                    id: track_check
+                    size_hint: None, None
+                    size: "48dp", "48dp"
+                    pos_hint: {'center_y': .5}
+
+                MDLabel:
+                    text: 'Trackability'
+
+                    
+
+
         
-        MDTextField:
-            id: date_field
-            hint_text: 'Date'
-            mode: 'rectangle'
-            size_hint: .9, .085
-            pos_hint: {'center_x':.5 , 'y':.75 }
-            on_focus: app.show_date_picker()
-
         MDBoxLayout:
             spacing: '5dp'
             size_hint: .95, None
-            pos_hint: {'center_x': .5, 'y': .67}
+            height: 40
+            pos_hint: {'center_x': .5}
 
             MDRaisedButton:
                 id: insertbtn
@@ -62,36 +174,46 @@ MDBoxLayout:
                 text: 'Cancel'
                 size_hint: .25, None
                 on_press: app.cancel()
-            
+        
         MDBoxLayout:
             id: datatable
-            pos_hint: {'center_x': .5, 'y':.13}
+            pos_hint: {'center_x': .5}
             size_hint_x: .95
 
 
         MDBoxLayout:
-            pos_hint: {'center_x': .5, 'y': .005}
-            size_hint: .9, .8
+            pos_hint: {'center_x': .5}
+            size_hint: .9, None
 
             MDBoxLayout:
                 orientation: 'vertical'
-                size_hint: .2, .15
+                size_hint: .2, None
+                height: 50
+                pos_hint: {'center_y': .5}
+
                 MDBoxLayout:
                     Check:
                         id: id_check
                         size_hint: None, None
                         size: "38dp", "38dp"
+                        pos_hint: {'center_y': .5}
 
                     MDLabel:
                         text: 'id'
+                        pos_hint: {'center_y': .5}
+
                 MDBoxLayout:
                     Check:
                         id: description_check
                         size_hint: None, None
                         size: "38dp", "38dp"
                         active: True
+                        pos_hint: {'center_y': .5}
+
                     MDLabel:
                         text: 'Description'
+                        pos_hint: {'center_y': .5}
+
 
 
             MDTextField:
@@ -99,9 +221,62 @@ MDBoxLayout:
                 hint_text: 'Search'
                 mode: 'rectangle'
                 size_hint_x: .7
-                pos_hint: {'center_x':.5, 'y': .02}
+                pos_hint: {'center_x':.5, 'center_y': .5}
                 on_text: app.search()
-                
+
+
+<CameraScreen>:
+    name: 'camerascreen'
+    MDBoxLayout:
+        orientation: 'vertical'
+
+        MDToolbar:
+            title: 'Take Product Picture'
+            left_action_items: [["keyboard-backspace", lambda x: app.return_to_main()]]
+
+        MDBoxLayout:
+            id: cambox
+
+        MDBoxLayout:
+            id: cambuttons
+            spacing: '5dp'
+            size_hint: .1, None
+            height: 40
+            pos_hint: {'center_x': .5}
+
+            MDIconButton:
+                icon: "camera-iris"
+                pos_hint: {"center_x": .5}
+                user_font_size: "64sp"
+                on_release: 
+                    app.get_image_name(root.capture())
+                    app.return_to_main()
+                text_color: app.theme_cls.primary_color
+
+            
+        MDBoxLayout:
+            size_hint_y: None
+            height: 15
+
+
+
+
+
+
+<MeasurementConfirm>:
+    on_release: root.set_icon(check)
+
+    CheckboxLeftWidget:
+        id: check
+        group: "check"
+
+
+<CategoryConfirm>:
+    on_release: root.set_icon(check)
+
+    CheckboxLeftWidget:
+        id: check
+        group: "check"
 
 <Check@MDCheckbox>:
     group: 'group'

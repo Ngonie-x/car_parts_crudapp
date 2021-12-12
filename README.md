@@ -1,5 +1,5 @@
-# car_parts_crudapp
-A simple app to keep track of car parts made using kivymd
+# Products Application
+A simple app to keep track of products made using kivymd
 
 # Requirements
 - Kivy==2.0.0

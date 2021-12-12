@@ -7,7 +7,7 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 class ExtractToPdf:
     def __init__(self, data):
         self.data = [list(i) for i in data]
-        self.data.insert(0, ['Id', 'Description', 'Price', 'Date'])
+        self.data.insert(0, ['Id', 'Description', 'Price', 'Date', 'Measure', 'Category', 'Track?', 'Image_Path'])
         self.doc = SimpleDocTemplate('products.pdf', pagesize=letter)
         self.elements = []
         self.create_table()
